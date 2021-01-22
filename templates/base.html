@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style>
+
+        * {
+            font-family: Helvetica, Arial, sans-serif;
+            color: black;
+            text-decoration: None;
+            font-weight: bold;
+
+            border-radius: 4px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+
+        }
+
+
+        .footer {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+    <title>{% block title %}ilCibo prodotti{% endblock %}</title>
+</head>
+<body>
+
+<div id="fb-root"></div>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">Home</a>
+    <a class="navbar-brand" href="{% url 'mercato' %}">Mercato</a>
+
+    {% if user.is_authenticated %}
+    <a class="navbar-brand" href="{% url 'login' %}">Profile</a>
+    <a class="navbar-brand" href="{% url 'logout' %}">Log-out</a>
+    {% else %}
+    <a class="navbar-brand" href="{% url 'login' %}">Log-in</a>
+    <a class="navbar-brand" href="{% url 'register' %}">Register</a>
+    {% endif %}
+    <a class="navbar-brand" href="{% url 'contatti' %}">Contatti</a>
+
+</nav>
+<div class="container">
+{% block content %}
+{% endblock %}
+
+</div>
+
+<footer>
+    <p class="footer">Copyright Niccolò Pellizzari 2021</p>
+</footer>
+
+</body>
+</html>

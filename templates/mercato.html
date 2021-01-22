@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{block.super}} - MERCATO {% endblock %}
+
+{% block content %}
+<style>
+    .card {
+
+        width: 400px;
+        height:auto;
+        background-color:#77B75B;
+        margin:5px;
+
+    }
+    .main-card {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .card-body {
+        border: 10px;
+        text-align: center;
+    }
+    img {
+        width: 300px
+        height:auto
+    }
+
+    h1 {
+        font-color:blue;
+    }
+
+    .btn {
+        background-color: #589E3B;
+        padding: 5px;
+    }
+</style>
+
+<h1>Mercato</h1>
+
+<div class="main-card">
+    {% for product in products %}
+    <div class="col">
+        <div class="card">
+            <img src="{{ product.image }}" class="card-img-top" alt="..." width="400" height="300"/>
+            <div class="card-body">
+                <h5 class="card-title">{{ product.food_name }}</h5>
+                <p class="card-price">€{{ product.food_price }}</p>
+                <p class="card-description">{{ product.description }}</p>
+                <a href="#" class="btn btn-primary">Add to cart</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

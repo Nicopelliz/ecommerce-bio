@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{block.super}} - REGISTRAZIONE {% endblock %}
+
+{% block content %}
+
+
+
+<style>
+
+
+        p {
+            margin-bottom: 10px;
+        }
+
+
+</style>
+
+
+<body>
+<script async crossorigin="anonymous" defer
+        nonce="0KgyrTJ5"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=421926379249808&autoLogAppEvents=1">
+</script>
+<h1 class="crypto-title">Edit Profile</h1>
+<div class="col-md-8 mt-3 left">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="form-group">
+            <form method="post" action="" >
+                {% csrf_token %}
+                <p>{{ form.username.label }}{{ form.username }}</p>
+                <p>{{ form.email.label }}{{ form.email }}</p>
+                <p>{{ form.password1.label }}{{ form.password1 }}</p>
+                <p>{{ form.password2.label }}{{ form.password2 }}</p>
+                <div class="btn-submit">
+                    <input type="submit" name="register" aria-label="ciao">
+                </div>
+                {{ form.errors }}
+            </form>
+
+                <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with"
+                         data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">
+                </div>
+                <p>Hai già un account?<a href="{% url 'login'  %}">log-in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+{% endblock content %}
