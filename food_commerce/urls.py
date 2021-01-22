@@ -1,25 +1,11 @@
-"""food_commerce URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from .views import register, contatti, home
 
 urlpatterns = [
     #admin
-    path('admin/', admin.site.urls),
+    path('amministrazione/', admin.site.urls),
 
     #homepage
     path('', home, name='home'),
@@ -30,9 +16,10 @@ urlpatterns = [
 
 
 
-    path('account/registration', register, name='register'),
+    path('registration', register, name='register'),
 
 
     # oders apps included
-    path('mercato', include('prodotti.urls')),
+    path('mercato/', include('prodotti.urls')),
+    path('carrello/', include('carrello.urls')),
 ]

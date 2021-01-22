@@ -22,12 +22,20 @@
 
         }
 
-
         .footer {
             text-align: center;
             font-size: 15px;
             font-weight: bold;
         }
+        .number-items-in-cart {
+            color:red;
+        }
+        .number-items-in-cart:before {
+            color:black;
+            content: "CARRELLO ";
+        }
+
+
     </style>
     <title>{% block title %}ilCibo prodotti{% endblock %}</title>
 </head>
@@ -46,8 +54,8 @@
     <a class="navbar-brand" href="{% url 'login' %}">Log-in</a>
     <a class="navbar-brand" href="{% url 'register' %}">Register</a>
     {% endif %}
+    <a class="navbar-brand  number-items-in-cart" href="{% url 'cart_detail' %}">{{request.session.cart|length}}</a>
     <a class="navbar-brand" href="{% url 'contatti' %}">Contatti</a>
-
 </nav>
 <div class="container">
 {% block content %}
