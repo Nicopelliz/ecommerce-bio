@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<html lang="en">
+<head>
+    <link href="{% static 'css/crypto-blog.css' %}" rel="stylesheet" type="text/css">
+
+    <style>
+        ul, #id_password {
+            display: none;
+        }
+        .errorlist {
+            display: block;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 10px;
+            color: red;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<h1 class="crypto-title">Your Profile</h1>
+<div class="col-md-8 mt-3 left">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="form-group">
+            <form method="post" >
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="btn-submit">
+                        <button class="btn" type="submit">Save</button>
+                </div>
+            </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+{% endblock content %}

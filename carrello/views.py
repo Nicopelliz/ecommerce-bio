@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from prodotti.models import Product
 from django.contrib.auth.decorators import login_required
-from cart.cart import Cart
+from .cart import Cart
 
 
 @login_required(login_url="/login")

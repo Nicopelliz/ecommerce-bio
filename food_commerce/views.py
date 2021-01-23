@@ -12,12 +12,14 @@ def register(request):
             return redirect('login')
 
     context = {'form': form}
-    return render(request, 'register.html', context)
+    return render(request, 'registration/register.html', context)
 
+def edit_profile(request):
+    return render(request, 'registration/edit_profile.html')
 
 def contatti(request):
     return render(request, 'contatti.html')
 
 
 def home(request):
-    return render(request, 'home.html')
+    return redirect('mercato')

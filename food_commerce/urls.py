@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from .views import register, contatti, home
+from .views import register, contatti, home, edit_profile
 
 urlpatterns = [
     #admin
@@ -13,11 +13,8 @@ urlpatterns = [
 
     #authentication , registration ecc....
     path('', include('django.contrib.auth.urls')),
-
-
-
     path('registration', register, name='register'),
-
+    path('edit-profile', edit_profile, name='edit_profile'),
 
     # oders apps included
     path('mercato/', include('prodotti.urls')),
