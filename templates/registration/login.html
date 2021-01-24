@@ -19,30 +19,68 @@
         }
 
 
+
+
+
     </style>
 </head>
 <body>
-<div id="fb-root"></div>
-<script async crossorigin="anonymous" defer
-        nonce="0KgyrTJ5"
-        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=421926379249808&autoLogAppEvents=1">
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+
+    FB.AppEvents.logPageView();
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
 </script>
+<div id="fb-root"></div>
+
 <h1 class="crypto-title">Login</h1>
 <div class="col-md-8 mt-3 left">
     <div class="card mb-4">
         <div class="card-body">
             <div class="form-group">
-                <form method="post" action="">
+                <form action="" method="post">
                     {% csrf_token %}
                     <p>{{ form.username.label }} {{ form.username }}</p>
                     <p>{{ form.password.label }} {{ form.password }}</p>
 
                     <div class="btn-submit">
-                        <input type="submit" name="login">
+                        <input name="login" type="submit">
                     </div>
-                    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with"
-                         data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+                            <button class="btn btn-danger  mb-2">
+                                <a href="{% url 'social:begin' 'google-oauth2' %}">Login with GOOGLE</a>
+                            </button>
+
+                            <button class="btn btn-primary mb-2">
+                                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+                            </button>
+                            <button class="btn btn-info mb-2">
+                                <a href="">Login with LinkedIn</a>
+                            </button>
+                        </div>
                     </div>
+                    <!--                    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with"
+                                             data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">
+                                        </div>-->
                     <p>Don't have an account?<a href="{% url 'register'%}">Register</a></p>
                 </form>
 

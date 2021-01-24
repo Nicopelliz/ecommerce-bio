@@ -1,7 +1,9 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from .views import register, contatti, home, edit_profile
+from .views import register, contatti, home, edit_profile, login
+from django.contrib.auth.views import LogoutView
+from . import settings
 
 urlpatterns = [
     #admin
@@ -16,7 +18,15 @@ urlpatterns = [
     path('registration', register, name='register'),
     path('edit-profile', edit_profile, name='edit_profile'),
 
+    #prova con social apps
+    path('', include('social_django.urls', namespace='social')),
+    path("login/", login, name="login"),
+    path('logout/', LogoutView.as_view, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+
     # oders apps included
     path('mercato/', include('prodotti.urls')),
     path('carrello/', include('carrello.urls')),
 ]
+
+
+

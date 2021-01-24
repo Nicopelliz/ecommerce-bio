@@ -1,9 +1,14 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+
 
     <style>
 
@@ -57,18 +62,18 @@
 
     <a class="navbar-brand  number-items-in-cart" href="{% url 'cart_detail' %}">
     {% if user.is_authenticated %}
-        {{request.session.cart|length}}
+        {{cart_total_quantity}}
     {% endif %}
     </a>
 
-
     <a class="navbar-brand" href="{% url 'contatti' %}">Contatti</a>
 </nav>
-<div class="container">
-{% block content %}
-{% endblock %}
 
-</div>
+
+                {% block content %}
+                {% endblock %}
+
+
 
 <footer>
     <p class="footer">Copyright Niccolò Pellizzari 2021</p>

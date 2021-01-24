@@ -19,7 +19,7 @@
 
     {% load cart_tag %}
 
-    <p>Number of Items : {{request.session.cart|length}}</p>
+    <p>Number of Items : {{cart_total_quantity}}</p>
 
     <p>Cart Detail</p>
 
@@ -32,7 +32,11 @@
     <p> {{value.name}} <img src="{{value.image}}" width="120" height="80">
         pezzi {{value.quantity}} € {{value.price}}
         <a class="aggiungi-togli" href="{% url 'item_increment' value.product_id %}">+</a>
+        {% if value.quantity > 1 %}
         <a class="aggiungi-togli" href="{% url 'item_decrement' value.product_id %}">-</a>
+        {% else %}
+        <a class="aggiungi-togli" href="{% url 'cart_remove' value.product_id %}">-</a>
+        {% endif %}
     </p>
 </div>
     {% endfor %}

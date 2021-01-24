@@ -17,9 +17,15 @@ def register(request):
 def edit_profile(request):
     return render(request, 'registration/edit_profile.html')
 
+# social_views
+
+def login(request):
+  return render(request, 'login.html')
+
+
 def contatti(request):
     return render(request, 'contatti.html')
 
-
 def home(request):
-    return redirect('mercato')
+    return render(request, 'home.html')
+    #return redirect('mercato')

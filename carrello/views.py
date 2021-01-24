@@ -15,6 +15,14 @@ def cart_add(request, id):
 
 
 @login_required(login_url="/login")
+def cart_remove(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.remove(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/login")
 def item_clear(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -48,3 +56,4 @@ def cart_clear(request):
 @login_required(login_url="/login")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
+
