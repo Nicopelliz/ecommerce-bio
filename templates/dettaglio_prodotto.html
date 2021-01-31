@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{block.super}} - MERCATO {% endblock %}
+
+{% block content %}
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+    #card-detail-view {
+        width:100%:
+        height:100%;
+        margin: 3%;
+    }
+
+    .card-img-top {
+        float: left;
+        width: 100%;
+        height:auto;
+        margin-right: 10px;
+    }
+
+    .card-title {
+        font-size: 26px;
+    }
+
+    .card-price {
+        font-size: 26px;
+    }
+
+    .card-description {
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 17px;
+    }
+
+    .add-to-cart {
+        background-color: #fe9920;
+        padding: 5px;
+        border-radius:4px;
+        font-size: 30px;
+        margin-top: 10px;
+        white-space: nowrap;
+    }
+
+    .add-to-cart:hover {
+        border: 1.5px solid #f3ecdc;
+        padding: 6px;
+
+    }
+
+    #add-to-cart {
+        text-align: center;
+        white-space: nowrap;
+    }
+
+
+
+@media screen and (min-width:660px) {
+
+    .card-img-top {
+        float: auto;
+        width: 48%;
+        height:auto;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width:850px) {
+
+    .card-img-top {
+        float: auto;
+        width: 43%;
+        height:auto;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+
+    .card-img-top {
+        float: auto;
+        width: 37%;
+        height:auto;
+        margin-right: 20px;
+    }
+
+        .card-title {
+        font-size: 32px;
+    }
+
+    .card-price {
+        font-size: 32px;
+    }
+
+    .card-description {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+
+
+}
+
+
+</style>
+
+
+<div id="card-detail-view">
+    <div id="img_detail"><img class="card-img-top" src="{{ product.imageURL }}"/></div>
+
+    <p class="card-title">{{ product.name }} -
+        <span class="card-price">{{ product.price }}€</span>
+    </p>
+
+    <p class="card-description">{{ product.description }}</p>
+
+    <p id="add-to-cart"><a class="button add-to-cart" href="{% url 'cart_add' product.id %}">Aggiungi al carrello</a>
+    </p>
+
+
+</div>
+
+{% endblock %}

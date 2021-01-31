@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import register, contatti, home, edit_profile, login
 from django.contrib.auth.views import LogoutView
-from . import settings
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     #admin
@@ -23,10 +24,13 @@ urlpatterns = [
     path("login/", login, name="login"),
     path('logout/', LogoutView.as_view, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
-    # oders apps included
+    # oder apps included
     path('mercato/', include('prodotti.urls')),
     path('carrello/', include('carrello.urls')),
-]
 
+
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

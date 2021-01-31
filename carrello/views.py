@@ -7,11 +7,9 @@ from .cart import Cart
 @login_required(login_url="/login")
 def cart_add(request, id):
     cart = Cart(request)
-    print(f'this is : {type(cart)}')
     product = Product.objects.get(id=id)
-    print(f'this is : {type(product)}')
     cart.add(product)
-    return redirect("mercato")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url="/login")
@@ -55,5 +53,9 @@ def cart_clear(request):
 
 @login_required(login_url="/login")
 def cart_detail(request):
-    return render(request, 'cart/cart_detail.html')
+    return render(request, 'cart/cart_detail2.html')
 
+
+@login_required(login_url="/login")
+def checkout(request):
+    return render(request, 'cart/checkout2.html')

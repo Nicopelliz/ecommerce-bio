@@ -5,56 +5,112 @@
 {% block title %} {{block.super}} - MERCATO {% endblock %}
 
 {% block content %}
-<style>
-    .card {
 
-        width: 400px;
+<style>
+    #main-market {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100 %:
+        align-content: space-between;
+        justify-content: center;
+        margin: 20px 10px;
+    }
+
+    #card {
+        max-width: 400px;
         height:auto;
-        background-color:#77B75B;
-        margin:5px;
+    }
+
+    #card:hover {
+
 
     }
-    .main-card {
-        display: flex;
-        justify-content: space-around;
 
+
+    .card {
+        margin: 20px 0;
+    }
+
+
+
+    .product-label {
+
+        border-radius:4px;
+        padding: 5px;
+        background-color:#899d6b;
+
+
+    }
+
+    .card-label {
+        font-family: 'Josefin Sans', sans-serif;
+        font-style: italic;
+        color:#f3ecdc;
+    }
+
+    .card-title {
+        font-size: 22px;
+        font-weight:400;
+    }
+
+    .card-price {
+        font-size: 23px;
+        font-weight:400;
     }
 
     .card-body {
         border: 10px;
         text-align: center;
-    }
-    img {
-        width: 300px
-        height:auto
-    }
-
-    h1 {
-        font-color:blue;
-    }
-
-    .btn {
-        background-color: #589E3B;
         padding: 5px;
+        margin: 5px;
+    }
+
+    .card-img-top {
+        width: 320px;
+        background: transparent;
+    }
+
+   /* .card-img-top:hover{
+        width: 340px;
+        height: auto;
+        position:relative;
+        border:2px solid white;
+        border-radius:4px;
+    }*/
+
+    .add-to-cart {
+        background-color: #fe9920;
+        margin-top: 0;
+        padding: 5px;
+        border-radius:4px;
+    }
+
+    .add-to-cart:hover {
+        border: 1.5px solid #f3ecdc;
+        padding: 6px;
+
     }
 </style>
 
-<h1>Mercato</h1>
 
-<div class="main-card">
+<div id="main-market">
     {% for product in products %}
-    <div class="col">
-        <div class="card">
-            <img src="{{ product.image }}" class="card-img-top" alt="..." width="400" height="300"/>
-            <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-<!--                <h5 class="card-title">{{ product.id }}</h5>-->
-                <p class="card-price">€{{ product.price }}</p>
-                <p class="card-description">{{ product.description }}</p>
-                <a href="{% url 'cart_add' product.id %}" class="btn btn-primary">Add to cart</a>
+    <div class="card">
+        <div class="card-body">
+
+            <div id="card" onclick="location.href='{% url 'dettaglio_prodotto' product.pk %}';"
+                 style="cursor: pointer;">
+                <img src="{{ product.imageURL }}" class="card-img-top" width="400" height="300"/>
+                <div class="product-label">
+                    <p class="card-label card-title">{{ product.name }}</p>
+                    <p class="card-label card-price">€{{ product.price }}</p>
+                </div>
             </div>
+            <a href="{% url 'cart_add' product.id %}" class="button add-to-cart">Aggiungi al carrello</a>
         </div>
     </div>
+
     {% endfor %}
 </div>
 

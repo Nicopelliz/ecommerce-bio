@@ -7,14 +7,15 @@
 {% block content %}
 
 
-
 <style>
+.user-form {
+    display: flex;
+    flex-direction: column;
 
+    justify-content: center;
+    width: 100 %:
 
-        p {
-            margin-bottom: 10px;
-        }
-
+}
 
 </style>
 
@@ -29,22 +30,32 @@
     <div class="card mb-4">
         <div class="card-body">
             <div class="form-group">
-            <form method="post" action="" >
-                {% csrf_token %}
-                <p>{{ form.username.label }}{{ form.username }}</p>
-                <p>{{ form.email.label }}{{ form.email }}</p>
-                <p>{{ form.password1.label }}{{ form.password1 }}</p>
-                <p>{{ form.password2.label }}{{ form.password2 }}</p>
-                <div class="btn-submit">
-                    <input type="submit" name="register" aria-label="ciao">
-                </div>
-                {{ form.errors }}
-            </form>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="user-form ">
+                        <p>Username {{ form.username }}</p>
+                        <p>E-mail {{ form.email }}</p>
+                        <p>Password {{ form.password1 }}</p>
+                        <p>Conferma Password {{ form.password2 }}</p>
+                        <div class="btn-submit">
+                            <input class="button social-button" name="register" type="submit" value="Registrati" >
+                        </div>
+                        <p id="form-errors">{{ form.errors }}</p>
 
-                <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with"
-                         data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">
-                </div>
-                <p>Hai già un account?<a href="{% url 'login'  %}">log-in</a></p>
+                        <button class="button social-button">
+                            <a href="{% url 'social:begin' 'google-oauth2' %}">Login with GOOGLE</a>
+                        </button>
+
+                        <button class="button social-button">
+                            <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+                        </button>
+
+                        <p>Hai già un account?<a href="{% url 'login'  %}">log-in</a></p>
+
+                    </div>
+                </form>
+
+
             </div>
         </div>
     </div>

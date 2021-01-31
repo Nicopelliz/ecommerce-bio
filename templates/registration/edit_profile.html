@@ -2,48 +2,56 @@
 
 {% load static %}
 
+{% block title %} {{block.super}} - REGISTRAZIONE {% endblock %}
+
 {% block content %}
 
 
-<html lang="en">
-<head>
-    <link href="{% static 'css/crypto-blog.css' %}" rel="stylesheet" type="text/css">
+<style>
+.user-form {
+    display: flex;
+    flex-direction: column;
 
-    <style>
-        ul, #id_password {
-            display: none;
-        }
-        .errorlist {
-            display: block;
-            font-size: 14px;
-            font-style: italic;
-            margin-bottom: 10px;
-            color: red;
-        }
+    justify-content: center;
+    width: 100 %:
 
-        p {
-            margin-bottom: 10px;
-        }
+}
+
+</style>
 
 
-    </style>
-
-</head>
 <body>
-<h1 class="crypto-title">Your Profile</h1>
+<script async crossorigin="anonymous" defer
+        nonce="0KgyrTJ5"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=421926379249808&autoLogAppEvents=1">
+</script>
+<h1 class="crypto-title">Edit Profile</h1>
 <div class="col-md-8 mt-3 left">
     <div class="card mb-4">
         <div class="card-body">
             <div class="form-group">
-            <form method="post" >
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="btn-submit">
-                        <button class="btn" type="submit">Save</button>
-                </div>
-            </form>
-            </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="user-form ">
 
+                        <p>{{form.username.label}}{{form.username}}</p>
+                        <p>{{form.first_name.label}}{{form.first_name}}</p>
+                        <p>{{form.last_name.label}}{{form.last_name}}</p>
+                        <p>{{form.email.label}}{{form.email}}</p>
+                        <p>{{form.password}}</p>
+                        <p>{{form.password.help_text}}</p>
+                        <div class="btn-submit">
+                            <input class="button social-button" name="register" type="submit" value="Save" >
+                        </div>
+                        <p id="form-errors">{{ form.errors }}</p>
+
+
+
+                    </div>
+                </form>
+
+
+            </div>
         </div>
     </div>
 </div>
@@ -52,4 +60,4 @@
 </html>
 
 
-{% endblock content %}
+{% endblock content %} %}

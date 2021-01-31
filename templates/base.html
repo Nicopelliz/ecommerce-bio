@@ -4,80 +4,322 @@
 <html lang="en">
 <head>
     <!-- Required meta tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
-
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+    <link href="{% static 'css/index.css' %}" rel="stylesheet"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/a21f4baaed.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+    <title>{% block title %}ilCibo prodotti{% endblock %}</title>
 
     <style>
 
-        * {
-            font-family: Helvetica, Arial, sans-serif;
-            color: black;
-            text-decoration: None;
-            font-weight: bold;
+    @import url('https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Raleway&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Josefin+Sans:wght@100;400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@0;1&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-            border-radius: 4px;
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        font-family: 'Josefin Sans', sans-serif;
+
+    }
+
+    html, body {
+        height:100%;
+    }
+
+    html {
+        background-image: url("{% static 'img/wallpaper-lino.jpg'%}");
+    }
+
+    body {
+        margin: 0 5px;
+
+    }
+
+    #container {
+        min-height: 100%;
+    }
+
+    #main {
+        overflow: auto;
+        padding-bottom: 80px;
+    }
+    #footer, #head-base {
+        border-radius:4px;
+        background-color: #735b44;
+    }
+
+    #head-base {
+
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap:wrap;
+        padding: 12px 3%;
+    }
+
+    .home1 {
+
+        order:1;
+        flex-grow: 1;
+        flex-basis: 33%;
+        align-self: flex-end;
+        padding-bottom: 8px;
+
+
+    }
+
+    .home2 {
+
+        order:2;
+        flex-grow: 1;
+        flex-basis: 34%;
+        text-align: center;
+    }
+
+    .home3 {
+
+        order:3;
+        flex-grow: 1;
+        flex-basis: 33%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+    }
+
+    .home-button:hover {
+        color: #deddbb;
+        border-radius: 2px;
+    }
+
+    .push-right {
+        margin-left: 140px;
+        margin-top: 10px;
+    }
+
+    .button {
+        text-decoration: none;
+        padding: 2px;
+        color: #f3ecdc;
+    }
+
+    .home-button {
+        font-weight: 500;
+        font-size: 30px;
+    }
+
+    .asana-button {
+
+    }
+
+    .visible-username {
+        text-decoration: none;
+        margin-top: 2px;
+        margin-left: 2px;
+        font-size: 20px;
+        color: #f3ecdc;
+    }
+
+    #mercato-button {
+
+        font-size: 75px;
+        font-family: 'Amatic SC', cursive;
+        font-weight: 400;
+        padding: 0 13px;
+        border: 4px double #f3ecdc;
+        border-radius:3px;
+    }
+
+    #content {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%)
+            }
+
+    #cart-button {
+        font-color: black;
+        font-size: 25px;
+        position: relative;
+    }
+
+    #cart-button #cart-number{
+        position: absolute;
+        top: -4px;
+        right: -4px;
+
+    }
+
+    #cart-number {
+        color: #52574e;
+        margin-left:-12px;
+        width: 30px;
+        height: 30px;
+        text-align:center;
+        background-color: #fe9920;
+        padding:4px 3px 0 3px;
+        border-radius: 50px;
+    }
+
+    .bi {
+        font-size: 50px;
+        padding: 0 2px 0;
+        position: relative;
+    }
+
+    .bi span{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .bi:hover {
+
+        color: #deddbb;
+        border-radius: 2px;
+        padding: 0 2px 0;
+    }
+
+    .login-button {
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: bold;
+        font-size: 17px;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        margin-right: 2px;
+        padding: 3.5px 2.5px 0.7px 1.8px;
+        background: #c9b28b;
+        border: 1px solid black;
+        border-radius: 4px;
+    }
+
+    .login-button:hover {
+        background: #deddbb;
+        color: black;
+        border-radius: 4px;
+    }
+
+
+    #footer {
+        padding: 20px;
+        margin-top: -65px;
+        margin-bottom: 5px;
+        position: relative;
+        height: 60px;
+        clear: both;
+
+    }
+
+    #footer .text-center {
+        text-align: center;
+        vertical-align: center;
+        font-size: 16px;
+        color: black;
+        text-decoration: none;
+        margin-bottom: 10px;
+    }
+
+    .text-center span {
+        color: black;
+    }
+
+    @media screen and (max-width: 1000px) {
+
+        .push-right {
+        margin-left: 145px;
+        }
+    }
+
+    @media screen and (max-width: 697px) {
+
+         .home2 {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
         }
 
-        .navbar {
-            display: flex;
-            justify-content: space-around;
+        .push-right {
+        margin-left: 10px;
+        }
+    }
 
+    @media screen and (max-width: 385px) {
+
+        .push-right {
+        margin-left: 0;
         }
 
-        .footer {
-            text-align: center;
-            font-size: 15px;
-            font-weight: bold;
-        }
-        .number-items-in-cart {
-            color:red;
-        }
-        .number-items-in-cart:before {
-            color:black;
-            content: "CARRELLO ";
-        }
+    }
 
 
     </style>
-    <title>{% block title %}ilCibo prodotti{% endblock %}</title>
+
 </head>
-<body>
 
-<div id="fb-root"></div>
+<body style="background-image: url(''{% static 'img/wallpaper-lino.jpg'%}'');">
 
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/">Home</a>
-    <a class="navbar-brand" href="{% url 'mercato' %}">Mercato</a>
+<div id="container">
+    <div id="main">
+        <nav id="head-base">
 
-    {% if user.is_authenticated %}
-    <a class="navbar-brand" href="{% url 'edit_profile' %}">Profile</a>
-    <a class="navbar-brand" href="{% url 'logout' %}">Log-out</a>
-    {% else %}
-    <a class="navbar-brand" href="{% url 'login' %}">Log-in</a>
-    <a class="navbar-brand" href="{% url 'register' %}">Register</a>
-    {% endif %}
+            <div class="home1">
+                <p><a class="button home-button asana-button" href="/">Asàna</a></p>
 
-    <a class="navbar-brand  number-items-in-cart" href="{% url 'cart_detail' %}">
-    {% if user.is_authenticated %}
-        {{cart_total_quantity}}
-    {% endif %}
-    </a>
+                <p>
+                    <a class="visible-username">
+                    {% if user.is_authenticated %}
+                    Ciao {{ user.first_name }}
+                    {% endif %}
+                    </a>
+                </p>
 
-    <a class="navbar-brand" href="{% url 'contatti' %}">Contatti</a>
-</nav>
+            </div>
+
+            <div class="home2"><a class="button home-button" id="mercato-button" href="{% url 'mercato' %}">MERCATO</a></div>
 
 
-                {% block content %}
-                {% endblock %}
+            <div class="home3">
+                {% if user.is_authenticated %}
+                <a class="login-button" href="{% url 'edit_profile' %}">Profilo</a>
+                <a class="login-button" href="{% url 'logout' %}">Esci</a>
+                {% else %}
+                <a class="login-button" href="{% url 'login' %}">Accedi</a>
+                <a class="login-button" href="{% url 'register' %}">Crea Account</a>
+                {% endif %}
 
+                <a class="button " href="{% url 'cart_detail' %}" id="cart-button">
+                    <i class="bi bi-cart2"></i>
+                    {% if user.is_authenticated and cart_total_quantity != ''%}
+                    <span id="cart-number"> {{cart_total_quantity}} </span>
+                    {% endif %}
+                </a>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
 
+<footer id="footer">
 
-<footer>
-    <p class="footer">Copyright Niccolò Pellizzari 2021</p>
+    <p class="text-center">Copyright &copy;
+        <span class="tm-current-year">2021</span> Niccolò Pellizzari
+    </p>
+
 </footer>
 
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 </body>
+
 </html>

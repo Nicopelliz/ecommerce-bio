@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-from . forms import CreateUserForm
+from . forms import CreateUserForm, UpdateUserForm
+from django.views.generic import CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -14,13 +17,23 @@ def register(request):
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
+
+@login_required(login_url="/login")
 def edit_profile(request):
-    return render(request, 'registration/edit_profile.html')
+    form = UpdateUserForm()
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(request.META.get('HTTP_REFERER'))
+
+    context = {'form': form}
+    return render(request, 'registration/edit_profile.html', context)
 
 # social_views
 
 def login(request):
-  return render(request, 'login.html')
+  return redirect(request.META.get('HTTP_REFERER'))
 
 
 def contatti(request):
