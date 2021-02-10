@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{block.super}} - SUCCESS {% endblock %}
+
+{% block content %}
+
+{% load mathfilters %}
+
+<html>
+
+<head>
+
+  <title>Thanks for your order!</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <section>
+
+    <h3>
+
+      Il tuo ordine è stato completato
+
+    </h3>
+    <p>Per qualsiasi domanda contattaci</p>
+  </section>
+
+</body>
+
+</html>
+
+
+{% endblock %}

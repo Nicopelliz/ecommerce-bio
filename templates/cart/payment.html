@@ -1,0 +1,502 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{block.super}} - PAGAMENTO {% endblock %}
+
+{% block content %}
+
+{% load mathfilters %}
+
+
+
+
+
+<!-- <script src="{% static 'js/client.js' %}"></script> -->
+
+
+
+
+
+
+<style>
+  #main-cart {
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  #cart-payment-form {
+    flex-basis: 50%;
+    position: relative;
+    margin: 1% 1% 1% 2%;
+    padding: 2%;
+    text-decoration: none;
+    color: #52574e;
+    border: 2px solid #52574e;
+    border-radius: 5px;
+
+  }
+
+  #cart-form {
+    flex-basis: 50%;
+    position: relative;
+    margin: 1% 2% 1% 1%;
+    padding: 2%;
+    text-decoration: none;
+    color: #52574e;
+    border: 2px solid #52574e;
+    border-radius: 5px;
+  }
+
+
+  .center-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 25px;
+  }
+
+  .down-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1% 2%;
+    line-height: 45px;
+  }
+
+  hr {
+
+    border: 1px solid #52574e;
+    margin-bottom: 5%;
+    margin-top: 2%;
+  }
+
+  #cart-details {
+    margin-top: 30px;
+  }
+
+
+  #one-cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px 0 0 5px;
+    position: relative;
+  }
+
+  #one-cart-item div {
+
+    font-size: 18px;
+  }
+
+  .image-product {
+
+    flex-basis: 30%;
+    position: relative;
+
+
+  }
+
+  .name-product {
+    flex-basis: 20%;
+    text-align: left;
+
+  }
+
+  .quantity-update {
+    flex-basis: 20%;
+    margin-left: 10px;
+  }
+
+
+  .quantity-product-total {
+    flex-basis: 30%;
+    text-align: center;
+  }
+
+  #one-cart-item .quantity-product {
+    font-size: 23px;
+  }
+
+  #one-cart-item .quantity-product-total {
+    font-size: 21px;
+  }
+
+  .img-in-cart {
+    max-width: 80px;
+    height: auto;
+  }
+
+  .button-size {
+    font-size: 25px;
+    color: #52574e;
+  }
+
+  /* pre created form */
+
+  #main .move-in-website {
+    position: absolute;
+    bottom: 100px;
+    left: 30px;
+  }
+
+
+  form {
+    width: 30vw;
+    min-width: 300px;
+    align-self: center;
+    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+    border-radius: 7px;
+    padding: 40px;
+    margin: auto;
+  }
+
+  input {
+    border-radius: 6px;
+    margin-bottom: 6px;
+    padding: 12px;
+    border: 1px solid rgba(50, 50, 93, 0.1);
+    height: 44px;
+    font-size: 16px;
+    width: 100%;
+    background: white;
+  }
+
+  .result-message {
+    line-height: 22px;
+    font-size: 16px;
+  }
+
+  .result-message a {
+    color: rgb(89, 111, 214);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #card-errors {
+    color: rgb(105, 115, 134);
+    text-align: left;
+    font-size: 13px;
+    line-height: 17px;
+    margin-top: 12px;
+  }
+
+  #card-element {
+    border-radius: 4px 4px 0 0;
+    padding: 12px;
+    border: 1px solid rgba(50, 50, 93, 0.1);
+    height: 44px;
+    width: 100%;
+    background: white;
+  }
+
+  #payment-request-button {
+    margin-bottom: 32px;
+  }
+
+  /* Buttons and links */
+  button {
+    background-color: #5469d4;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    border-radius: 0 0 4px 4px;
+    border: 0;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    background-color: rgb(250, 250, 245);
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+    width: 100%;
+  }
+
+  #checkout-button {
+    background-color: #5469d4;
+  }
+
+  button:hover {
+    filter: contrast(115%);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  /* spinner/processing state, errors */
+  .spinner,
+  .spinner:before,
+  .spinner:after {
+    border-radius: 50%;
+  }
+
+  .spinner {
+    color: #ffffff;
+    font-size: 22px;
+    text-indent: -99999px;
+    margin: 0px auto;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    box-shadow: inset 0 0 0 2px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  .spinner:before,
+  .spinner:after {
+    position: absolute;
+    content: "";
+  }
+
+  .spinner:before {
+    width: 10.4px;
+    height: 20.4px;
+    background: #5469d4;
+    border-radius: 20.4px 0 0 20.4px;
+    top: -0.2px;
+    left: -0.2px;
+    -webkit-transform-origin: 10.4px 10.2px;
+    transform-origin: 10.4px 10.2px;
+    -webkit-animation: loading 2s infinite ease 1.5s;
+    animation: loading 2s infinite ease 1.5s;
+  }
+
+  .spinner:after {
+    width: 10.4px;
+    height: 10.2px;
+    background: #5469d4;
+    border-radius: 0 10.2px 10.2px 0;
+    top: -0.1px;
+    left: 10.2px;
+    -webkit-transform-origin: 0px 10.2px;
+    transform-origin: 0px 10.2px;
+    -webkit-animation: loading 2s infinite ease;
+    animation: loading 2s infinite ease;
+  }
+
+  @-webkit-keyframes loading {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    form {
+      width: 80vw;
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+
+    #main-cart {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      margin: 2%;
+
+    }
+
+    #cart-payment-form {
+      flex-basis: 50%;
+      position: relative;
+      width: 100%;
+      margin: 1% 3%;
+      padding: 2%;
+    }
+
+
+    #cart-form {
+      flex-basis: 50%;
+      position: relative;
+      width: 100%;
+      margin: 1% 3%;
+      padding: 2%;
+    }
+
+  }
+
+  @media only screen and (max-width: 600px) {
+    form {
+      width: 80vw;
+    }
+  }
+</style>
+
+
+
+<div id="main-cart">
+
+  <!--{% if payment.opzioni_di_pagamento == 'S' %}-->
+  <div id="cart-payment-form">
+    <!-- Display a payment form -->
+    
+
+    <form action="./S" method="POST" id="payment-form">
+      {% csrf_token %}
+      <div class="form-row">
+
+        <label for="card-element">
+          Credit or debit card
+        </label>
+
+        <div id="card-element">
+          <!--Stripe.js injects the Card Element-->
+        </div>
+
+        <div id="card-errors" role="alert"></div>
+      </div>
+
+      <button id="checkout-button">
+
+        <div class="spinner hidden" id="spinner"></div>
+
+        <span id="button-text">Pay</span>
+
+      </button>
+
+    </form>
+
+  </div>
+
+  {% endif %}
+
+  <div id="cart-form">
+
+    <h2>Riepilogo carrello</h2>
+
+
+    <div id="cart-details">
+
+      {% for order_item in object.items.all %}
+
+      <div id="one-cart-item">
+
+
+        <div class="image-product"><a href="{% url 'dettaglio-prodotto' order_item.product.id %}"><img
+              class="img-in-cart" src="{{order_item.product.imageURL}}"></a></div>
+        <div class="name-product">{{order_item.product.name}}</div>
+        <div class="quantity-update">
+          <div class="quantity-product">x {{order_item.quantity}}</div>
+        </div>
+
+
+        {% with answer=order_item.product.price %}
+
+
+        <div class="quantity-product-total">€ {{answer|mul:order_item.quantity|floatformat:1}}</div>
+        {% endwith %}
+
+
+      </div>
+
+      {% endfor %}
+
+    </div>
+    <hr class="line-break">
+    <div class="center-title">
+      <div>Prodotti: {{object.get_total_quantity}}</div>
+      <div>Totale € {{ object.get_total_price|floatformat:1}}</div>
+    </div>
+
+  </div>
+</div>
+<div class="down-buttons">
+  <div><a class="login-button button-size" href="{% url 'carrello' %}">Torna al carrello</a></div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script nonce="">  // Create a Stripe client.
+
+// test
+console.log('CIAO NICCOLO')
+
+// Set your publishable key: remember to change this to your live publishable key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+
+var stripe = Stripe('{{STRIPE_PUBLIC_KEY}}');
+var elements = stripe.elements();
+// Custom styling can be passed to options when creating an Element.
+var style = {
+  base: {
+    // Add your base input styles here. For example:
+    fontSize: '16px',
+    color: '#32325d',
+  },
+};
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+// Create a token or display an error when the form is submitted.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  stripe.createToken(card).then(function(result) {
+    if (result.error) {
+      // Inform the customer that there was an error.
+      var errorElement = document.getElementById('card-errors');
+      errorElement.textContent = result.error.message;
+    } else {
+      // Send the token to your server.
+      stripeTokenHandler(result.token);
+    }
+  });
+});
+
+function stripeTokenHandler(token) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var form = document.getElementById('payment-form');
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput);
+
+  // Submit the form
+  form.submit();
+}
+
+
+
+</script>
+
+
+
+{% endblock extra_scripts %}

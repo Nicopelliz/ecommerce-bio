@@ -25,8 +25,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
     # oder apps included
-    path('mercato/', include('prodotti.urls')),
-    path('carrello/', include('carrello.urls')),
+    path('', include('prodotti.urls')),
+    #path('carrello/', include('carrello.urls')),
 
 
 ]

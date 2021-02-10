@@ -11,21 +11,17 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        width: 100 %:
+        width: 100%;
         align-content: space-between;
-        justify-content: center;
-        margin: 20px 10px;
+        justify-content: center;       
     }
 
     #card {
         max-width: 400px;
-        height:auto;
+        height: auto;
     }
 
-    #card:hover {
-
-
-    }
+    #card:hover {}
 
 
     .card {
@@ -36,27 +32,30 @@
 
     .product-label {
 
-        border-radius:4px;
+        border-radius: 4px;
         padding: 5px;
-        background-color:#899d6b;
+        background-color: #899d6b;
 
+    }
 
+    .button {
+        color: #f3ecdc;
     }
 
     .card-label {
         font-family: 'Josefin Sans', sans-serif;
         font-style: italic;
-        color:#f3ecdc;
+        color: #f3ecdc;
     }
 
     .card-title {
         font-size: 22px;
-        font-weight:400;
+        font-weight: 400;
     }
 
     .card-price {
         font-size: 23px;
-        font-weight:400;
+        font-weight: 400;
     }
 
     .card-body {
@@ -71,25 +70,45 @@
         background: transparent;
     }
 
-   /* .card-img-top:hover{
-        width: 340px;
-        height: auto;
-        position:relative;
-        border:2px solid white;
-        border-radius:4px;
-    }*/
-
     .add-to-cart {
         background-color: #fe9920;
         margin-top: 0;
         padding: 5px;
-        border-radius:4px;
+        border-radius: 4px;
     }
 
     .add-to-cart:hover {
         border: 1.5px solid #f3ecdc;
         padding: 6px;
 
+    }
+
+    #flex-pages {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        color: #52574e;
+
+    }
+
+    .bi-caret-right,
+    .bi-caret-left {
+        font-size: 35px;
+        color: #52574e;
+
+    }
+
+
+    #not-working,
+    #not-working1 {
+        color: transparent;
+    }
+
+    #page-number {
+        flex: 0 0 70px;
+        text-align: center;
     }
 </style>
 
@@ -99,21 +118,39 @@
     <div class="card">
         <div class="card-body">
 
-            <div id="card" onclick="location.href='{% url 'dettaglio_prodotto' product.pk %}';"
-                 style="cursor: pointer;">
-                <img src="{{ product.imageURL }}" class="card-img-top" width="400" height="300"/>
+            <div id="card" onclick="location.href='{% url 'dettaglio-prodotto' product.slug %}';"
+                style="cursor: pointer;">
+                <img src="{{ product.imageURL }}" class="card-img-top" width="400" height="300" />
                 <div class="product-label">
                     <p class="card-label card-title">{{ product.name }}</p>
                     <p class="card-label card-price">€{{ product.price }}</p>
                 </div>
             </div>
-            <a href="{% url 'cart_add' product.id %}" class="button add-to-cart">Aggiungi al carrello</a>
+            <a href="{% url 'aggiungi-al-carrello' product.slug %}" class="button add-to-cart">Aggiungi al carrello</a>
         </div>
     </div>
 
     {% endfor %}
 </div>
+{% if is_paginated %}
+
+<div id="flex-pages">
+    {% if page_obj.has_previous %}
+    <div><a href="?page={{ page_obj.previous_page_number }}"><i class="bi bi-caret-left"></i></a></div>
+    {% else %}
+    <div><a><i id="not-working" class="bi bi-caret-left"></i></a></div>
+    {% endif %}
+    <div id="page-number">
+        <h3>pag {{ page_obj.number }}</h3>
+    </div>
 
 
+    {% if page_obj.has_next %}
+    <div><a href="?page={{ page_obj.next_page_number }}"><i class="bi bi-caret-right"></i></a></div>
+    {% else %}
+    <div><a><i id="not-working1" class="bi bi-caret-right"></i></a></div>
+    {% endif %}
+</div>
+{% endif %}
 
 {% endblock %}

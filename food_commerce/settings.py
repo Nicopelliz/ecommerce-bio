@@ -29,10 +29,11 @@ INSTALLED_APPS = [
     # my apps
     'prodotti',
     'carrello',
-    #third parties apps
+    # third parties apps
     'social_django',
     'sslserver',
     'mathfilters',
+    'crispy_forms',
 ]
 
 CART_SESSION_ID = 'cart'
@@ -127,7 +128,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR/'media')
 # redirects
 
-LOGIN_URL = '/auth/login/google-oauth2/'
+LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'mercato'
@@ -149,3 +150,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("your_google_clientsecret")
 # SOCIAL_AUTH_FACEBOOK_SECRET = config('APP_SECRET_FACEBOOK')  # App Secret
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# stripe all needed
+
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')

@@ -51,11 +51,9 @@ def cart_clear(request):
     return redirect("cart_detail")
 
 
-@login_required(login_url="/login")
-def cart_detail(request):
-    return render(request, 'cart/cart_detail2.html')
+
 
 
 @login_required(login_url="/login")
 def checkout(request):
-    return render(request, 'cart/checkout2.html')
+    return render(request, 'cart/checkout.html')
